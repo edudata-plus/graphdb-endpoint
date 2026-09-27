@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>SPARQL Query</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@zazuko/yasgui/build/yasgui.min.css"
+  >
+</head>
+
+<body>
+
+<div id="yasgui"></div>
+
+<script src="https://unpkg.com/@zazuko/yasgui/dist/yasgui.min.js"></script>
+
+<script>
+  const yasgui = new Yasgui(document.getElementById("yasgui"), {
+    requestConfig: {
+      endpoint: "/sparql-endpoint"
+    }
+  });
+</script>
+
+</body>
+</html>
