@@ -1,0 +1,9 @@
+services:
+  graphdb:
+    image: ontotext/graphdb:11.5.1
+    container_name: graphdb
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7200:7200"
+    volumes:
+      - ./graphdb-home:/opt/graphdb/home
