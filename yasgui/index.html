@@ -17,11 +17,40 @@
 <script src="https://unpkg.com/@zazuko/yasgui/build/yasgui.min.js"></script>
 
 <script>
-  const yasgui = new Yasgui(document.getElementById("yasgui"), {
+const params = new URLSearchParams(window.location.search);
+
+const endpoints = {
+  "jp-textbook": "/sparql-endpoint/textbook",
+  "jp-cos": "/sparql-endpoint/cos"
+};
+
+const key = params.get("endpoint");
+
+const defaultEndpoint =
+  endpoints[key] || endpoints["jp-textbook"];
+
+const yasgui = new Yasgui(
+  document.getElementById("yasgui"),
+  {
     requestConfig: {
-      endpoint: "/sparql-endpoint"
+      endpoint: defaultEndpoint,
+      method: "POST"
+    },
+
+    endpointCatalogueOptions: {
+      getData: () => [
+        {
+          endpoint: "/sparql-endpoint/textbook",
+          label: "Textbook LOD"
+        },
+        {
+          endpoint: "/sparql-endpoint/cos",
+          label: "Course of Study LOD"
+        }
+      ]
     }
-  });
+  }
+);
 </script>
 
 </body>
