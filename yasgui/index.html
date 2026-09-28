@@ -6,7 +6,7 @@
 
   <link
     rel="stylesheet"
-    href="https://unpkg.com/@zazuko/yasgui/build/yasgui.min.css"
+    href="https://unpkg.com/@matdata/yasgui/build/yasgui.min.css"
   >
 </head>
 
@@ -14,7 +14,7 @@
 
 <div id="yasgui"></div>
 
-<script src="https://unpkg.com/@zazuko/yasgui/build/yasgui.min.js"></script>
+<script src="https://unpkg.com/@matdata/yasgui/build/yasgui.min.js"></script>
 
 <script>
 const params = new URLSearchParams(window.location.search);
@@ -37,18 +37,16 @@ const yasgui = new Yasgui(
       method: "POST"
     },
 
-    endpointCatalogueOptions: {
-      getData: () => [
-        {
-          endpoint: "/sparql-endpoint/textbook",
-          label: "Textbook LOD"
-        },
-        {
-          endpoint: "/sparql-endpoint/cos",
-          label: "Course of Study LOD"
-        }
-      ]
-    }
+    endpointButtons: [
+      {
+        endpoint: endpoints["jp-textbook"],
+        label: "Textbook LOD"
+      },
+      {
+        endpoint: endpoints["jp-cos"],
+        label: "Course of Study LOD"
+      }
+    ]
   }
 );
 </script>
