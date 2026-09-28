@@ -49,6 +49,21 @@ const yasgui = new Yasgui(
     ]
   }
 );
+
+/*
+ * URLに endpoint が明示されている場合は、
+ * localStorageから復元されたendpointよりURL指定を優先する
+ */
+if (key && endpoints[key]) {
+  const tab = yasgui.getTab();
+
+  if (tab) {
+    tab.setRequestConfig({
+      ...tab.getRequestConfig(),
+      endpoint: endpoints[key]
+    });
+  }
+}
 </script>
 
 </body>
