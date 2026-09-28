@@ -36,11 +36,24 @@ const defaultEndpoint =
 const yasgui = new Yasgui(
   document.getElementById("yasgui"),
   {
-    populateFromUrl: false,
-
     requestConfig: {
       endpoint: defaultEndpoint,
       method: "POST"
+    },
+
+    /*
+     * URLで dataset が指定されている場合、
+     * localStorageから復元されたタブ設定よりこちらを優先
+     */
+    populateFromUrl: (config) => {
+      if (key && endpoints[key]) {
+        config.requestConfig = {
+          ...config.requestConfig,
+          endpoint: endpoints[key],
+          method: config.requestConfig?.method || "POST"
+        };
+      }
+      return config;
     },
 
     endpointButtons: [
@@ -55,17 +68,6 @@ const yasgui = new Yasgui(
     ]
   }
 );
-
-if (key && endpoints[key]) {
-  const tab = yasgui.getTab();
-
-  if (tab) {
-    tab.setRequestConfig({
-      ...tab.getRequestConfig(),
-      endpoint: endpoints[key]
-    });
-  }
-}
 </script>
 
 </body>
