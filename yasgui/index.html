@@ -28,7 +28,7 @@ const endpoints = {
   "jp-cos": "/sparql-endpoint/cos"
 };
 
-const key = params.get("endpoint");
+const key = params.get("dataset");
 
 const defaultEndpoint =
   endpoints[key] || endpoints["jp-textbook"];
@@ -36,6 +36,8 @@ const defaultEndpoint =
 const yasgui = new Yasgui(
   document.getElementById("yasgui"),
   {
+    populateFromUrl: false,
+
     requestConfig: {
       endpoint: defaultEndpoint,
       method: "POST"
@@ -54,10 +56,6 @@ const yasgui = new Yasgui(
   }
 );
 
-/*
- * URLに endpoint が明示されている場合は、
- * localStorageから復元されたendpointよりURL指定を優先する
- */
 if (key && endpoints[key]) {
   const tab = yasgui.getTab();
 
