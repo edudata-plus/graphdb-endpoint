@@ -21,51 +21,31 @@
 <script src="https://unpkg.com/@matdata/yasgui/build/yasgui.min.js"></script>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-
-const endpoints = {
-  "jp-textbook": "/sparql-endpoint/textbook",
-  "jp-cos": "/sparql-endpoint/cos"
-};
-
-const key = params.get("dataset");
-
-const defaultEndpoint =
-  endpoints[key] || endpoints["jp-textbook"];
-
 const yasgui = new Yasgui(
   document.getElementById("yasgui"),
   {
-    populateFromUrl: false,
+    persistenceId: null,
 
     requestConfig: {
-      endpoint: defaultEndpoint,
+      endpoint: "/sparql-endpoint/textbook",
       method: "POST"
     },
 
+    // デフォルト true。明示してもよい
+    populateFromUrl: true,
+
     endpointButtons: [
       {
-        endpoint: endpoints["jp-textbook"],
+        endpoint: "/sparql-endpoint/textbook",
         label: "Textbook LOD"
       },
       {
-        endpoint: endpoints["jp-cos"],
+        endpoint: "/sparql-endpoint/cos",
         label: "Course of Study LOD"
       }
     ]
   }
 );
-
-if (key && endpoints[key]) {
-  const tab = yasgui.getTab();
-
-  if (tab) {
-    tab.setRequestConfig({
-      ...tab.getRequestConfig(),
-      endpoint: endpoints[key]
-    });
-  }
-}
 </script>
 
 </body>
